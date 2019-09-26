@@ -3,7 +3,7 @@ console.log("Bievenido al Workshop");
 const firebase = require("firebase-admin");
 
 //#1 - Cambia el PATH de nuestro Service Account
-const serviceAccount = require("./fir-demo-tall-firebase-adminsdk-slx1i-f2a13f3b51.json");
+const serviceAccount = require("./EL/PATH/A/SERVICEACCOUNT.json");
 
 //#2 - Cambia la URL de la Base de datos
 firebase.initializeApp({
