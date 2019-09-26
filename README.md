@@ -1,5 +1,4 @@
 # Firebase-workshop
-## Pasos Iniciales
 
 1. Crear cuenta de Firebase
 2. Crear cuenta de GA
@@ -11,4 +10,4 @@
 6. Permisos a usuarios
 6.1 Permisos por default
 6.2 ⭐️ Permisos custom
-
+7. Configurando iOS
