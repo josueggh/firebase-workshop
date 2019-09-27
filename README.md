@@ -12,5 +12,8 @@
 6.2 ⭐️ Permisos custom
 7. Configurando iOS
 7.1 Instalando CocoaPods
-7.2 Agregando Firebase al PodFile
-7.3 Agregando Firebase al Código (Appdelegate.h , Appdelegate.m)
+7.2 Agregar Firebase al PodFile
+7.3 Agregar Firebase al Código (Appdelegate.h , Appdelegate.m)
+8. Firebase Hosting
+8.1 Agregando códigos de GA
+9. Firebase Auth
