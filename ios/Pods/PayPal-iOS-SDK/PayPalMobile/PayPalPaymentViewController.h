@@ -1,9 +1,9 @@
 //
 //  PayPalPaymentViewController.h
 //
-//  Version 2.1.0
+//  Version 2.18.1
 //
-//  Copyright (c) 2014, PayPal
+//  Copyright (c) 2014-2016 PayPal, Inc. All rights reserved.
 //  All rights reserved.
 //
 
@@ -22,23 +22,44 @@
 #pragma mark - Delegates and notifications
 
 @class PayPalPaymentViewController;
+typedef void (^PayPalPaymentDelegateCompletionBlock)(void);
 
-/// Exactly one of these delegate methods will get called when the UI completes.
-/// You MUST dismiss the modal view controller from these delegate methods.
+/// Exactly one of these two required delegate methods will get called when the UI completes.
+/// You MUST dismiss the modal view controller from these required delegate methods.
 @protocol PayPalPaymentDelegate <NSObject>
 @required
 
 /// User canceled the payment process.
+/// Your code MUST dismiss the PayPalPaymentViewController.
 /// @param paymentViewController The PayPalPaymentViewController that the user canceled without making a payment.
-- (void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController;
+- (void)payPalPaymentDidCancel:(nonnull PayPalPaymentViewController *)paymentViewController;
 
 /// User successfully completed the payment.
+/// The PayPalPaymentViewController's activity indicator has been dismissed.
+/// Your code MAY deal with the completedPayment, if it did not already do so within your optional
+///     payPalPaymentViewController:willCompletePayment:completionBlock: method.
+/// Your code MUST dismiss the PayPalPaymentViewController.
 /// See https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/ for
-/// information about payment verification.
+///     information about payment verification.
 /// @param paymentViewController The PayPalPaymentViewController where the user successfullly made a payment.
 /// @param completedPayment completedPayment.confirmation contains information your server will need to verify the payment.
-- (void)payPalPaymentViewController:(PayPalPaymentViewController *)paymentViewController
-                 didCompletePayment:(PayPalPayment *)completedPayment;
+- (void)payPalPaymentViewController:(nonnull PayPalPaymentViewController *)paymentViewController
+                 didCompletePayment:(nonnull PayPalPayment *)completedPayment;
+
+@optional
+/// User successfully completed the payment.
+/// The PayPalPaymentViewController's activity indicator is still visible.
+/// Your code MAY deal with the completedPayment; e.g., send it to your server and await confirmation.
+/// Your code MUST finish by calling the completionBlock.
+/// Your code must NOT dismiss the PayPalPaymentViewController.
+/// See https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/ for
+///     information about payment verification.
+/// @param paymentViewController The PayPalPaymentViewController where the user successfullly made a payment.
+/// @param completedPayment completedPayment.confirmation contains information your server will need to verify the payment.
+/// @param completionBlock Block to execute when your processing is done.
+- (void)payPalPaymentViewController:(nonnull PayPalPaymentViewController *)paymentViewController
+                willCompletePayment:(nonnull PayPalPayment *)completedPayment
+                    completionBlock:(nonnull PayPalPaymentDelegateCompletionBlock)completionBlock;
 
 @end
 
@@ -52,12 +73,12 @@
 /// @param configuration The configuration to be used for the lifetime of the controller
 ///     (e.g., default email address or hideCreditCard); can be nil.
 /// @param delegate The delegate you want to receive updates about the payment.
-- (instancetype)initWithPayment:(PayPalPayment *)payment
-                  configuration:(PayPalConfiguration *)configuration
-                       delegate:(id<PayPalPaymentDelegate>)delegate;
+- (nullable instancetype)initWithPayment:(nonnull PayPalPayment *)payment
+                           configuration:(nullable PayPalConfiguration *)configuration
+                                delegate:(nonnull id<PayPalPaymentDelegate>)delegate;
 
 /// Delegate access
-@property(nonatomic, weak, readonly) id<PayPalPaymentDelegate> paymentDelegate;
+@property(nonatomic, weak, readonly, nullable) id<PayPalPaymentDelegate> paymentDelegate;
 
 /// PayPalPaymentViewControllerState See the state property for context.
 typedef NS_ENUM(NSInteger, PayPalPaymentViewControllerState) {

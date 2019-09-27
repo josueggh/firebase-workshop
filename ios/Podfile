@@ -1,7 +1,21 @@
-platform :ios, '7.0'
+# Uncomment the next line to define a global platform for your project
+platform :ios, '8.0'
 pod 'FMDB'
 pod 'BButton'
+pod 'Firebase/Analytics'
+
+#AQUI VA LA CONFIGURACION DE FIREBASE
 pod 'PayPal-iOS-SDK'
-################################
-#AQUI AGREGAMOS GOOGLE ANALYTICS
-################################
+
+target 'ShoppingCartExample' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for ShoppingCartExample
+
+  target 'ShoppingCartExampleTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
