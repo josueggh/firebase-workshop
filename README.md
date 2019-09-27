@@ -11,3 +11,6 @@
 6.1 Permisos por default
 6.2 ⭐️ Permisos custom
 7. Configurando iOS
+7.1 Instalando CocoaPods
+7.2 Agregando Firebase al PodFile
+7.3 Agregando Firebase al Código (Appdelegate.h , Appdelegate.m)
