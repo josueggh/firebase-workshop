@@ -17,3 +17,14 @@
 8. Firebase Hosting
 8.1 Agregando códigos de GA
 9. Firebase Auth
+9.1 [Firebase UI](https://github.com/firebase/firebaseui-web#using-firebaseui-for-authentication)
+10. Firebase Storage
+10.1 gsutil
+11. Databases
+11.1 Realtime vs Store
+12. Firebase Functions
+12.1 ⭐️ Extensions
+13. Crashalytics
+14. TestLab
+15. ⭐️ App Distribution
+16. Firebase Events
